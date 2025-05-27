@@ -21,7 +21,7 @@ By encapsulating each component in self-contained modules (S3, IAM, Lambda, Glue
 The single Python Lambda function (`stream_simulator.py`) simulates and writes machine telemetry data:
 1. **Generates** 50 data points per invocation that include a timestamp, temperature, pressure, vibration, RPM, and status (`OK`/`WARN`/`ERROR`).
 2. **Writes** each batch as a uniquely named CSV (based on UTC timestamp) into the `machine_data/` folder in S3.
-3. **(Legacy append mode)** attempts to fetch and append to an existing CSV if one exists—though in the modular design you may choose time-partitioned files only.
+3. **Legacy append mode** attempts to fetch and append to an existing CSV if one exists, though in the modular design you may choose time-partitioned files only.
 
 This approach ensures each run produces a discrete file, avoids contention on a single object, and keeps the data organized by time for efficient querying in Athena.
 
